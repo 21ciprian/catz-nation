@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
+import {useEffect, useState} from 'react'
 // import Image from 'next/image'
-import {useState} from 'react'
+import Header from '../components/Header'
+
 interface ICat {
 	adaptability: number
 	affection_level: number
@@ -24,23 +26,47 @@ interface ICat {
 	wikipedia_url: string
 }
 interface IHome {
+	n: string
 	data: ICat[]
 }
-interface ISrc {
-	setImgSrc: (cat: string) => void
-}
-const Home: React.FC<IHome> = ({data}) => {
-	// const [cats, setCats] = useState(data)
-	const [imgSrc, setImgSrc] = useState<string | (() => ISrc) | null>(null)
-	console.log({data})
-	// setCats(data)
-	const getCats = () => {
-		// setCats(data)
-		console.log('called')
+
+const Home = ({data}: IHome) => {
+	const [fact, setFact] = useState<string>('')
+	const [name, setName] = useState<string>('')
+	const [cats, setCats] = useState<ICat[] | null>(null)
+	const [catsOrigin, setCatsOrigin] = useState<string>('')
+
+	const origin = Array.from(new Set(data.map(c => c.origin)))
+
+	console.log({origin})
+	console.log({cats})
+	const getCatByName = (name: string) => {
+		setName(name)
+		const filterred = data?.filter(cat =>
+			cat?.name?.toLocaleLowerCase().includes(name.toLowerCase())
+		)
+		setCats(filterred)
+		console.log({filterred})
 	}
-	const handleOnError = () => {
-		setImgSrc('https://media.makeameme.org/created/error-404-cannot.jpg')
+	const getCatByOrigin = (origin: string) => {
+		setCatsOrigin(origin)
+		const filterred = data?.filter(cat =>
+			cat?.origin?.toLocaleLowerCase().includes(origin.toLowerCase())
+		)
+		setCats(filterred)
+		console.log({filterred})
 	}
+	//keep origin in state
+	//maybe do the filtering ininline?
+	useEffect(() => {
+		const intervalId = setInterval(async () => {
+			const res = await fetch(`https://catfact.ninja/fact`)
+			const f = await res.json()
+			setFact(f?.fact)
+		}, 7000)
+		return () => clearInterval(intervalId)
+	}, [fact])
+
 	return (
 		<div>
 			<Head>
@@ -52,29 +78,58 @@ const Home: React.FC<IHome> = ({data}) => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<h1>Cats</h1>
-			<button onClick={getCats}>get cat</button>
+			<Header />
+			<input
+				type='text'
+				value={name}
+				onChange={(e: React.FormEvent<HTMLInputElement>) =>
+					getCatByName(e.currentTarget.value)
+				}
+			/>
+			<select
+				value={catsOrigin}
+				onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+					getCatByOrigin(event.target.value)
+				}>
+				<option value=''>Origin</option>
+				{origin?.map(o => (
+					<option key={o} value={o}>
+						{o}
+					</option>
+				))}
+			</select>
+			{fact && <p>random fact: {fact}</p>}
+
 			<div>
-				{!data ? (
-					<p>loading</p>
-				) : (
-					data?.map(cat => (
-						<div key={cat?.id}>
-							<h3>{cat?.name}</h3>
-							<img src={cat?.image?.url} alt={cat?.name} />
-							<p>{cat?.description}</p>
-						</div>
-					))
-				)}
+				{cats
+					? cats?.map(cat => (
+							<div key={cat?.id}>
+								<a href={cat?.wikipedia_url} target='_blank' rel='noreferrer'>
+									<h3>{cat?.name}</h3>
+									<img src={cat?.image?.url} alt={cat?.name} />
+									<p>{cat?.description}</p>
+								</a>
+							</div>
+					  ))
+					: data?.map(cat => (
+							<div key={cat?.id}>
+								<a href={cat?.wikipedia_url} target='_blank' rel='noreferrer'>
+									<h3>{cat?.name}</h3>
+									<img src={cat?.image?.url} alt={cat?.name} />
+									<p>{cat?.description}</p>
+								</a>
+							</div>
+					  ))}
 			</div>
 		</div>
 	)
 }
 
 export async function getServerSideProps() {
-	const response = await fetch(`https://api.thecatapi.com/v1/breeds`, {
-		headers: {limit: '10'}
-	})
+	const response = await fetch(`https://api.thecatapi.com/v1/breeds`)
 	const data = await response.json()
+
 	return {props: {data}}
 }
+
 export default Home
