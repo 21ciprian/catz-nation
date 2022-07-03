@@ -7,7 +7,7 @@ import Header from '../components/Header'
 
 import CatComponent from '../components/CatComponent'
 
-// import styled from 'styled-components'
+import styled from 'styled-components'
 interface ICat {
 	cat: any
 	adaptability: number
@@ -36,6 +36,13 @@ interface IHome {
 	data: ICat[]
 }
 
+const CatContainer = styled.section`
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	margin: 3rem auto;
+`
 const Home = ({data}: IHome) => {
 	const [fact, setFact] = useState<string>(
 		'One reason that kittens sleep so much is because a growth hormone is released only during sleep.'
@@ -124,11 +131,11 @@ const Home = ({data}: IHome) => {
 			/>
 
 			{fact && <Fact fact={fact} />}
-			<div>
+			<CatContainer>
 				{filteredCats
 					? filteredCats?.map(cat => <CatComponent key={cat?.id} cat={cat} />)
 					: data?.map(cat => <CatComponent key={cat?.id} cat={cat} />)}
-			</div>
+			</CatContainer>
 		</div>
 	)
 }
