@@ -124,8 +124,6 @@ const Home = ({data}: IHome) => {
 			/>
 
 			{fact && <Fact fact={fact} />}
-			{/* <SwiperComponent data={data} /> */}
-
 			<div>
 				{filteredCats
 					? filteredCats?.map(cat => <CatComponent key={cat?.id} cat={cat} />)
