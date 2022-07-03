@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
-import {useEffect, useState} from 'react'
-// import Image from 'next/image'
+import {useState} from 'react'
+
+import Fact from '../components/FactComponent'
 import Header from '../components/Header'
 
+import CatComponent from '../components/CatComponent'
+
+// import styled from 'styled-components'
 interface ICat {
+	cat: any
 	adaptability: number
 	affection_level: number
 	child_friendly: number
@@ -16,6 +21,7 @@ interface ICat {
 	name: string
 	image: {
 		url: string
+		id: string
 	}
 	life_span: string
 	origin: string
@@ -31,21 +37,29 @@ interface IHome {
 }
 
 const Home = ({data}: IHome) => {
-	const [fact, setFact] = useState<string>('')
+	const [fact, setFact] = useState<string>(
+		'One reason that kittens sleep so much is because a growth hormone is released only during sleep.'
+	)
 	const [name, setName] = useState<string>('')
-	const [cats, setCats] = useState<ICat[] | null>(null)
+	const [filteredCats, setFilteredCats] = useState<ICat[]>([])
 	const [catsOrigin, setCatsOrigin] = useState<string>('')
+	const [catsLifeSpan, setCatsLifeSpan] = useState<string>('')
+	const [catsWeight, setCatsWeight] = useState<string>('')
 
-	const origin = Array.from(new Set(data.map(c => c.origin)))
+	const origin = Array.from(new Set(data.map(c => c.origin))).sort()
+	const lifespan = Array.from(new Set(data.map(c => c.life_span))).sort(
+		(a: any, b: any) => Number(a.split('-')[0]) - Number(b.split('-')[0])
+	)
+	const weight = Array.from(new Set(data.map(c => c.weight.metric))).sort()
 
-	console.log({origin})
-	console.log({cats})
+	console.log({origin, lifeSpan: lifespan, weight})
+	console.log({cats: filteredCats, data})
 	const getCatByName = (name: string) => {
 		setName(name)
 		const filterred = data?.filter(cat =>
 			cat?.name?.toLocaleLowerCase().includes(name.toLowerCase())
 		)
-		setCats(filterred)
+		setFilteredCats(filterred)
 		console.log({filterred})
 	}
 	const getCatByOrigin = (origin: string) => {
@@ -53,22 +67,34 @@ const Home = ({data}: IHome) => {
 		const filterred = data?.filter(cat =>
 			cat?.origin?.toLocaleLowerCase().includes(origin.toLowerCase())
 		)
-		setCats(filterred)
+		setFilteredCats(filterred)
 		console.log({filterred})
 	}
-	//keep origin in state
-	//maybe do the filtering ininline?
-	useEffect(() => {
-		const intervalId = setInterval(async () => {
-			const res = await fetch(`https://catfact.ninja/fact`)
-			const f = await res.json()
-			setFact(f?.fact)
-		}, 7000)
-		return () => clearInterval(intervalId)
-	}, [fact])
+	const getCatByLifeSpan = (lifeSpan: string) => {
+		setCatsLifeSpan(lifeSpan)
+		const filterred = data?.filter(cat =>
+			cat?.life_span?.toLocaleLowerCase().includes(lifeSpan.toLowerCase())
+		)
+		setFilteredCats(filterred)
+		console.log({filterred})
+	}
+	const getCatByWeight = (weight: string) => {
+		setCatsWeight(weight)
+		const filterred = data?.filter(cat =>
+			cat?.weight?.metric?.toLocaleLowerCase().includes(weight.toLowerCase())
+		)
+		setFilteredCats(filterred)
+		console.log({filterred})
+	}
+
+	const getFact = async () => {
+		const res = await fetch(`https://catfact.ninja/fact`)
+		const f = await res.json()
+		setFact(f?.fact)
+	}
 
 	return (
-		<div>
+		<div style={{overflow: 'hidden'}}>
 			<Head>
 				<title>CatzNation</title>
 				<meta
@@ -77,49 +103,33 @@ const Home = ({data}: IHome) => {
 				/>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<h1>Cats</h1>
-			<Header />
-			<input
-				type='text'
-				value={name}
-				onChange={(e: React.FormEvent<HTMLInputElement>) =>
-					getCatByName(e.currentTarget.value)
-				}
+
+			<Header
+				setFilteredCats={setFilteredCats}
+				setCatsOrigin={setCatsOrigin}
+				setCatsLifeSpan={setCatsLifeSpan}
+				setCatsWeight={setCatsWeight}
+				catsOrigin={catsOrigin}
+				catsLifeSpan={catsLifeSpan}
+				catsWeight={catsWeight}
+				getCatByName={getCatByName}
+				name={name}
+				getCatByOrigin={getCatByOrigin}
+				origin={origin}
+				getCatByLifeSpan={getCatByLifeSpan}
+				getCatByWeight={getCatByWeight}
+				lifespan={lifespan}
+				weight={weight}
+				getFact={getFact}
 			/>
-			<select
-				value={catsOrigin}
-				onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-					getCatByOrigin(event.target.value)
-				}>
-				<option value=''>Origin</option>
-				{origin?.map(o => (
-					<option key={o} value={o}>
-						{o}
-					</option>
-				))}
-			</select>
-			{fact && <p>random fact: {fact}</p>}
+
+			{fact && <Fact fact={fact} />}
+			{/* <SwiperComponent data={data} /> */}
 
 			<div>
-				{cats
-					? cats?.map(cat => (
-							<div key={cat?.id}>
-								<a href={cat?.wikipedia_url} target='_blank' rel='noreferrer'>
-									<h3>{cat?.name}</h3>
-									<img src={cat?.image?.url} alt={cat?.name} />
-									<p>{cat?.description}</p>
-								</a>
-							</div>
-					  ))
-					: data?.map(cat => (
-							<div key={cat?.id}>
-								<a href={cat?.wikipedia_url} target='_blank' rel='noreferrer'>
-									<h3>{cat?.name}</h3>
-									<img src={cat?.image?.url} alt={cat?.name} />
-									<p>{cat?.description}</p>
-								</a>
-							</div>
-					  ))}
+				{filteredCats
+					? filteredCats?.map(cat => <CatComponent key={cat?.id} cat={cat} />)
+					: data?.map(cat => <CatComponent key={cat?.id} cat={cat} />)}
 			</div>
 		</div>
 	)
