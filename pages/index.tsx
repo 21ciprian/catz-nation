@@ -40,8 +40,11 @@ const CatContainer = styled.section`
 	width: 90%;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 2rem;
-	margin: 3rem auto;
+	margin: 2rem auto;
+	padding: 1rem;
+	/* border: 2px solid red; */
 `
 const Home = ({data}: IHome) => {
 	const [fact, setFact] = useState<string>(

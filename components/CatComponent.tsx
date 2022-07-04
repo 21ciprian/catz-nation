@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import styled from 'styled-components'
-
+import cat404 from '../assets/cat404.jpg'
 interface ICat {
 	cat: {
 		id: string
@@ -22,7 +22,8 @@ const CatContainer = styled.div`
 	height: 25rem;
 	border-radius: 1rem;
 	background-color: #fff;
-	border: 1px solid #bababa;
+	border: 1px solid #e4e4e4;
+	transition: all 0.5s ease;
 	&:hover {
 		box-shadow: 0 0 8px 5px #bababa;
 		background-color: #70f1da;
@@ -70,7 +71,10 @@ const CatComponent = ({cat}: ICat) => {
 		<CatContainer>
 			<a href={cat?.wikipedia_url} target='_blank' rel='noreferrer'></a>
 			<div>
-				<img src={cat?.image?.url} alt={cat?.name} />
+				<img
+					src={`${!cat?.image?.url ? cat404 : cat.image.url}`}
+					alt={cat?.name}
+				/>
 			</div>
 			<div>
 				<h3>{cat?.name}</h3>

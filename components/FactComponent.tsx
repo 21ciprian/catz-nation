@@ -7,7 +7,7 @@ const FactText = styled.p`
 	min-height: 5rem;
 	display: flex;
 	align-items: center;
-	margin: 2rem auto;
+	justify-content: center;
 	background-color: #f16ff1;
 	padding: 1rem 6rem;
 	color: #fff;
