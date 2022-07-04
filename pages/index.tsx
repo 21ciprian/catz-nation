@@ -112,19 +112,15 @@ const Home = ({data}: IHome) => {
 			</Head>
 
 			<Header
-				setFilteredCats={setFilteredCats}
-				setCatsOrigin={setCatsOrigin}
-				setCatsLifeSpan={setCatsLifeSpan}
-				setCatsWeight={setCatsWeight}
 				catsOrigin={catsOrigin}
 				catsLifeSpan={catsLifeSpan}
 				catsWeight={catsWeight}
 				getCatByName={getCatByName}
-				name={name}
 				getCatByOrigin={getCatByOrigin}
-				origin={origin}
 				getCatByLifeSpan={getCatByLifeSpan}
 				getCatByWeight={getCatByWeight}
+				name={name}
+				origin={origin}
 				lifespan={lifespan}
 				weight={weight}
 				getFact={getFact}

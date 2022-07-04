@@ -6,23 +6,22 @@ import SelectComponent from '../components/SelectComponent'
 const Header = styled.header`
 	background-color: #fff;
 	width: 100%;
-	padding: 2rem 1rem;
+	padding: 1rem 3rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	h1 {
 		font-weight: 500;
+		margin-left: 3rem;
 	}
 
 	div {
-		width: 60%;
 		display: flex;
 
 		justify-content: center;
 		gap: 1rem;
 		input {
 			padding: 0.5rem 0;
-			/* width: 20rem; */
 			font-size: 1.1rem;
 			outline: none;
 			border: none;
@@ -36,7 +35,7 @@ const Header = styled.header`
 			cursor: pointer;
 		}
 		div {
-			/* padding: 0.5rem; */
+			padding: 0 0.5rem;
 			border-bottom: 2px solid #717171;
 			display: flex;
 			width: max-content;
@@ -61,10 +60,6 @@ const Header = styled.header`
 `
 
 export interface IProps {
-	setFilteredCats: (str: any) => void
-	setCatsOrigin: (str: any) => void
-	setCatsLifeSpan: (str: any) => void
-	setCatsWeight: (str: any) => void
 	getCatByName: (str: string) => void
 	getCatByOrigin: (e: string) => void
 	getCatByLifeSpan: (e: string) => void
@@ -131,7 +126,7 @@ const HeaderComponent = ({
 						getCatByWeight(event.target.value)
 					}
 				/>
-				<button onClick={getFact}>Get cat fact</button>
+				<button onClick={getFact}>Get a cat fact</button>
 			</div>
 		</Header>
 	)

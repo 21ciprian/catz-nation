@@ -21,8 +21,15 @@ const CatContainer = styled.div`
 	flex-direction: column;
 	height: 25rem;
 	border-radius: 1rem;
-	border: 1px solid rgba(113, 113, 113, 0.74);
-	background-color: #70f1da;
+	background-color: #fff;
+	border: 1px solid #bababa;
+	&:hover {
+		box-shadow: 0 0 8px 5px #bababa;
+		background-color: #70f1da;
+		button {
+			background-color: #fff;
+		}
+	}
 	a {
 		text-decoration: none;
 	}
@@ -54,7 +61,7 @@ const CatContainer = styled.div`
 		border-bottom-right-radius: 50rem;
 		border: none;
 		outline: none;
-		background-color: #fff;
+		background-color: #70f1da;
 		cursor: pointer;
 	}
 `
