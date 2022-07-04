@@ -15,7 +15,11 @@ const FactText = styled.p`
 	font-size: 1.1rem;
 `
 const FactComponent = ({fact}: IFact) => {
-	return <FactText>{fact}</FactText>
+	return (
+		<FactText>
+			<em>{`"${fact}"`}</em>
+		</FactText>
+	)
 }
 
 export default FactComponent
