@@ -27,6 +27,8 @@ const CatContainer = styled.div`
 	&:hover {
 		box-shadow: 0 0 8px 5px #bababa;
 		background-color: #70f1da;
+		transform: scale(1.01);
+
 		button {
 			background-color: #fff;
 		}
