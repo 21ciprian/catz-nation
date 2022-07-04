@@ -111,7 +111,7 @@ const CatContainer = styled.article`
 `
 const Description = styled.p`
 	padding: 1rem;
-	background-color: #e4e4e4;
+	background-color: #f7f7f7;
 `
 const Stats = styled.section`
 	padding: 1rem;
