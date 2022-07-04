@@ -14,7 +14,7 @@ import {
 	generateOriginArray,
 	generateWeightArray
 } from '../utils'
-interface ICat {
+export interface ICat {
 	cat: any
 	adaptability: number
 	affection_level: number
