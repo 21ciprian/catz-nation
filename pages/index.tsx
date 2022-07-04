@@ -1,13 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
 import {useState} from 'react'
-
+import styled from 'styled-components'
+import CatComponent from '../components/CatComponent'
 import Fact from '../components/FactComponent'
 import Header from '../components/Header'
-
-import CatComponent from '../components/CatComponent'
-
-import styled from 'styled-components'
+import {
+	filterCatsByLifespan,
+	filterCatsByName,
+	filterCatsByOrigin,
+	filterCatsByWeight,
+	generateLifespanArray,
+	generateOriginArray,
+	generateWeightArray
+} from '../utils'
 interface ICat {
 	cat: any
 	adaptability: number
@@ -56,45 +62,47 @@ const Home = ({data}: IHome) => {
 	const [catsLifeSpan, setCatsLifeSpan] = useState<string>('')
 	const [catsWeight, setCatsWeight] = useState<string>('')
 
-	const origin = Array.from(new Set(data.map(c => c.origin))).sort()
-	const lifespan = Array.from(new Set(data.map(c => c.life_span))).sort(
-		(a: any, b: any) => Number(a.split('-')[0]) - Number(b.split('-')[0])
-	)
-	const weight = Array.from(new Set(data.map(c => c.weight.metric))).sort()
+	//generate arrays for filtering cat objects
+	const origin = generateOriginArray(data)
+	const lifespan = generateLifespanArray(data)
+	const weight = generateWeightArray(data)
 
-	console.log({origin, lifeSpan: lifespan, weight})
-	console.log({cats: filteredCats, data})
+	//filter cats by name when user types in the input field
 	const getCatByName = (name: string) => {
 		setName(name)
-		const filterred = data?.filter(cat =>
-			cat?.name?.toLocaleLowerCase().includes(name.toLowerCase())
-		)
+		const filterred = filterCatsByName(data, name)
+
 		setFilteredCats(filterred)
-		console.log({filterred})
 	}
+	//filter cats by origin when user chooses an option
+
 	const getCatByOrigin = (origin: string) => {
 		setCatsOrigin(origin)
-		const filterred = data?.filter(cat =>
-			cat?.origin?.toLocaleLowerCase().includes(origin.toLowerCase())
-		)
+		const filterred = filterCatsByOrigin(data, origin)
+
 		setFilteredCats(filterred)
 		console.log({filterred})
+		setCatsOrigin('Origin')
 	}
-	const getCatByLifeSpan = (lifeSpan: string) => {
-		setCatsLifeSpan(lifeSpan)
-		const filterred = data?.filter(cat =>
-			cat?.life_span?.toLocaleLowerCase().includes(lifeSpan.toLowerCase())
-		)
+	//filter cats by lifespan when user chooses an option
+
+	const getCatByLifeSpan = (lifespan: string) => {
+		setCatsLifeSpan(lifespan)
+		const filterred = filterCatsByLifespan(data, lifespan)
+
 		setFilteredCats(filterred)
 		console.log({filterred})
+		setCatsLifeSpan('Lifespan (years)')
 	}
+	//filter cats by weight when user chooses an option
+
 	const getCatByWeight = (weight: string) => {
 		setCatsWeight(weight)
-		const filterred = data?.filter(cat =>
-			cat?.weight?.metric?.toLocaleLowerCase().includes(weight.toLowerCase())
-		)
+		const filterred = filterCatsByWeight(data, weight)
+
 		setFilteredCats(filterred)
 		console.log({filterred})
+		setCatsWeight('Weight (kg)')
 	}
 
 	const getFact = async () => {
