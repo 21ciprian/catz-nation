@@ -139,7 +139,7 @@ const Home = ({data}: IHome) => {
 
 			{fact && <Fact fact={fact} />}
 			<CatContainer>
-				{filteredCats
+				{filteredCats.length
 					? filteredCats?.map(cat => <CatComponent key={cat?.id} cat={cat} />)
 					: data?.map(cat => <CatComponent key={cat?.id} cat={cat} />)}
 			</CatContainer>
