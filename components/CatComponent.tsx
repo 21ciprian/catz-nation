@@ -69,10 +69,9 @@ const CatContainer = styled.div`
 const CatComponent = ({cat}: ICat) => {
 	return (
 		<CatContainer>
-			<a href={cat?.wikipedia_url} target='_blank' rel='noreferrer'></a>
 			<div>
 				<img
-					src={`${!cat?.image?.url ? cat404 : cat.image.url}`}
+					src={`${!cat?.image?.url ? cat404 : cat?.image?.url}`}
 					alt={cat?.name}
 				/>
 			</div>

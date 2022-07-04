@@ -43,7 +43,12 @@ const Cat = ({data}: IBreeds) => {
 			</div>
 			<p>Origin: {data?.breeds[0]?.origin}</p>
 
-			<Link href='/'>Go Back</Link>
+			<Link href='/'>
+				<p>Go Back</p>
+			</Link>
+			<a href={data?.breeds[0]?.wikipedia_url} target='_blank' rel='noreferrer'>
+				<p>Wiki..</p>
+			</a>
 		</div>
 	)
 }
