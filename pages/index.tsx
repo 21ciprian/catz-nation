@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 import styled from 'styled-components'
 import CatComponent from '../components/CatComponent'
 import Fact from '../components/FactComponent'
@@ -52,7 +52,9 @@ const CatContainer = styled.section`
 	padding: 1rem;
 	/* border: 2px solid red; */
 `
+// const audio: HTMLAudioElement = new Audio('/meow.mp3')
 const Home = ({data}: IHome) => {
+	console.log('cats data: ', data)
 	const [fact, setFact] = useState<string>(
 		'One reason that kittens sleep so much is because a growth hormone is released only during sleep.'
 	)
@@ -61,7 +63,9 @@ const Home = ({data}: IHome) => {
 	const [catsOrigin, setCatsOrigin] = useState<string>('')
 	const [catsLifeSpan, setCatsLifeSpan] = useState<string>('')
 	const [catsWeight, setCatsWeight] = useState<string>('')
-
+	const audio = useRef<HTMLAudioElement | undefined>(
+		typeof Audio !== 'undefined' ? new Audio('/meow.mp3') : undefined
+	)
 	//generate arrays for filtering cat objects
 	const origin = generateOriginArray(data)
 	const lifespan = generateLifespanArray(data)
@@ -106,6 +110,7 @@ const Home = ({data}: IHome) => {
 	}
 
 	const getFact = async () => {
+		audio.current?.play()
 		const res = await fetch(`https://catfact.ninja/fact`)
 		const f = await res.json()
 		setFact(f?.fact)
