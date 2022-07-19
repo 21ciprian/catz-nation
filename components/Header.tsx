@@ -15,10 +15,13 @@ const Header = styled.header`
 	}
 
 	div {
-		display: flex;
+		display: none;
 
-		justify-content: center;
 		gap: 1rem;
+		@media (min-width: 1080px) {
+			display: flex;
+			justify-content: center;
+		}
 		input {
 			padding: 0.5rem 0;
 			font-size: 1.1rem;
