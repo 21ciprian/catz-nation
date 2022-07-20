@@ -2,6 +2,7 @@ import {BsSearch} from 'react-icons/bs'
 import styled from 'styled-components'
 import InputComponent from '../components/InputComponent'
 import SelectComponent from '../components/SelectComponent'
+import Hamburger from './Hamburger'
 
 const Header = styled.header`
 	background-color: #fff;
@@ -15,7 +16,7 @@ const Header = styled.header`
 		border: 1px solid red;
 	}
 
-	div {
+	div:nth-of-type(2) {
 		display: none;
 
 		gap: 1rem;
@@ -96,6 +97,7 @@ const HeaderComponent = ({
 			<h1>
 				Catz.<em>Nation</em>
 			</h1>
+			<Hamburger />
 			<div>
 				<div>
 					<InputComponent
