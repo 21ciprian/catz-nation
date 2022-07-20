@@ -6,12 +6,13 @@ import SelectComponent from '../components/SelectComponent'
 const Header = styled.header`
 	background-color: #fff;
 	width: 100%;
-	padding: 2rem 8rem;
+	padding: 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	h1 {
 		font-weight: 500;
+		border: 1px solid red;
 	}
 
 	div {
