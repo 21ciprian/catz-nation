@@ -59,6 +59,7 @@ const Home = ({data}: IHome) => {
 		'One reason that kittens sleep so much is because a growth hormone is released only during sleep.'
 	)
 	const [name, setName] = useState<string>('')
+	const [menuOpen, setMenuOpen] = useState<boolean>(false)
 	const [filteredCats, setFilteredCats] = useState<ICat[]>([])
 	const [catsOrigin, setCatsOrigin] = useState<string>('')
 	const [catsLifeSpan, setCatsLifeSpan] = useState<string>('')
@@ -66,6 +67,7 @@ const Home = ({data}: IHome) => {
 	const audio = useRef<HTMLAudioElement | undefined>(
 		typeof Audio !== 'undefined' ? new Audio('/meow.mp3') : undefined
 	)
+	console.log({menuOpen})
 	//generate arrays for filtering cat objects
 	const origin = generateOriginArray(data)
 	const lifespan = generateLifespanArray(data)
@@ -128,6 +130,8 @@ const Home = ({data}: IHome) => {
 			</Head>
 
 			<Header
+				menuOpen={menuOpen}
+				setMenuOpen={setMenuOpen}
 				catsOrigin={catsOrigin}
 				catsLifeSpan={catsLifeSpan}
 				catsWeight={catsWeight}

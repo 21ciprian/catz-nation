@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
-type Props = {}
+interface IProps {
+	menuOpen: boolean
+	setMenuOpen: (arg: boolean) => void
+}
 const Wrapper = styled.div`
 	width: 2rem;
 	height: 1.5rem;
@@ -29,9 +32,9 @@ const Span = styled.span`
 		/* transform: rotate(${props => (props ? '-42deg' : '')}); */
 	}
 `
-const Hamburger = (props: Props) => {
+const Hamburger = ({menuOpen, setMenuOpen}: IProps) => {
 	return (
-		<Wrapper>
+		<Wrapper onClick={() => setMenuOpen(!menuOpen)}>
 			<Span></Span>
 			<Span></Span>
 			<Span></Span>

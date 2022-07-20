@@ -68,7 +68,9 @@ export interface IProps {
 	getCatByOrigin: (e: string) => void
 	getCatByLifeSpan: (e: string) => void
 	getCatByWeight: (e: string) => void
+	setMenuOpen: (arg: boolean) => void
 	getFact: () => void
+	menuOpen: boolean
 	catsOrigin: string
 	catsLifeSpan: string
 	catsWeight: string
@@ -90,6 +92,8 @@ const HeaderComponent = ({
 	getCatByOrigin,
 	getCatByLifeSpan,
 	getCatByWeight,
+	setMenuOpen,
+	menuOpen,
 	getFact
 }: IProps) => {
 	return (
@@ -97,7 +101,7 @@ const HeaderComponent = ({
 			<h1>
 				Catz.<em>Nation</em>
 			</h1>
-			<Hamburger />
+			<Hamburger menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 			<div>
 				<div>
 					<InputComponent
