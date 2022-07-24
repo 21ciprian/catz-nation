@@ -6,10 +6,14 @@ import SelectComponent from './SelectComponent'
 const Menu = styled.section`
 	background-color: #fff;
 	width: 22rem;
+	height: 100vh;
 	padding: 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: fixed;
+	top: 0;
+	right: 0;
 
 	div:nth-of-type(1) {
 		/* display: none; */
