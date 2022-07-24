@@ -11,6 +11,8 @@ const Header = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: relative;
+	z-index: 5;
 	h1 {
 		font-weight: 500;
 		border: 1px solid red;
