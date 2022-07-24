@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import CatComponent from '../components/CatComponent'
 import Fact from '../components/FactComponent'
 import Header from '../components/Header'
+import SideMenu from '../components/SideMenu'
 import {
 	filterCatsByLifespan,
 	filterCatsByName,
@@ -145,7 +146,22 @@ const Home = ({data}: IHome) => {
 				weight={weight}
 				getFact={getFact}
 			/>
-
+			<SideMenu
+				menuOpen={menuOpen}
+				setMenuOpen={setMenuOpen}
+				catsOrigin={catsOrigin}
+				catsLifeSpan={catsLifeSpan}
+				catsWeight={catsWeight}
+				getCatByName={getCatByName}
+				getCatByOrigin={getCatByOrigin}
+				getCatByLifeSpan={getCatByLifeSpan}
+				getCatByWeight={getCatByWeight}
+				name={name}
+				origin={origin}
+				lifespan={lifespan}
+				weight={weight}
+				getFact={getFact}
+			/>
 			{fact && <Fact fact={fact} />}
 			<CatContainer>
 				{filteredCats.length
