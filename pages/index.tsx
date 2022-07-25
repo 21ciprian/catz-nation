@@ -101,6 +101,7 @@ const Home = ({data}: IHome) => {
 		setFilteredCats(filterred)
 		console.log({filterred})
 		setCatsLifeSpan('Lifespan (years)')
+		setMenuOpen(false)
 	}
 	//filter cats by weight when user chooses an option
 
