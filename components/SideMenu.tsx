@@ -1,4 +1,3 @@
-import {BsSearch} from 'react-icons/bs'
 import styled from 'styled-components'
 import InputComponent from './InputComponent'
 import SelectComponent from './SelectComponent'
@@ -11,7 +10,7 @@ const Menu = styled.section`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -28,28 +27,33 @@ const Menu = styled.section`
 		font-size: 1.1rem;
 		outline: none;
 		border: none;
+		width: 100%;
 	}
 	select {
 		border: none;
 		outline: none;
 		font-size: 1.1rem;
 		padding: 0.5rem;
-
+		width: 20rem;
 		cursor: pointer;
 	}
 	div {
+		width: 20rem;
+
 		padding-right: 0.5rem;
 		/* border-bottom: 2px solid #717171; */
 		background-color: #fff;
 
 		display: flex;
-		width: max-content;
+		/* width: max-content; */
 		align-items: center;
 		svg {
 			color: #717171;
 		}
 	}
 	button {
+		width: 20rem;
+
 		padding: 0.5rem 1rem;
 		font-size: 1.1rem;
 		border-top-left-radius: 50rem;
@@ -104,7 +108,6 @@ const SideMenu = ({
 					name={name}
 					getCatByName={getCatByName}
 				/>
-				<BsSearch size={'1.5rem'} />
 			</div>
 			<SelectComponent
 				optionsArray={origin}
