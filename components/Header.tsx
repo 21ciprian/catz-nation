@@ -15,7 +15,6 @@ const Header = styled.header`
 	z-index: 5;
 	h1 {
 		font-weight: 500;
-		border: 1px solid red;
 	}
 
 	div:nth-of-type(2) {
