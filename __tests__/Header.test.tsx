@@ -56,4 +56,9 @@ describe('HeaderComponent', () => {
 		const selectOrigin = screen.getByText(/lifespan/i)
 		expect(selectOrigin).toBeInTheDocument()
 	})
+	it('Should render select weight', () => {
+		setup()
+		const selectOrigin = screen.getByText(/weight/i)
+		expect(selectOrigin).toBeInTheDocument()
+	})
 })
