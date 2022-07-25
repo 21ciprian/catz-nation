@@ -112,6 +112,7 @@ const Home = ({data}: IHome) => {
 		setFilteredCats(filterred)
 		console.log({filterred})
 		setCatsWeight('Weight (kg)')
+		setMenuOpen(false)
 	}
 
 	const getFact = async () => {
