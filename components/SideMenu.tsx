@@ -1,3 +1,4 @@
+import {BsSearch} from 'react-icons/bs'
 import styled from 'styled-components'
 import InputComponent from './InputComponent'
 import SelectComponent from './SelectComponent'
@@ -6,7 +7,7 @@ type TMenu = {
 	open: boolean
 }
 const Menu = styled.section<TMenu>`
-	background-color: rgba(8, 8, 8, 0.673);
+	background-color: rgba(8, 8, 8, 1);
 	width: 100vw;
 	height: 100vh;
 	padding: 2rem;
@@ -26,13 +27,7 @@ const Menu = styled.section<TMenu>`
 		display: none;
 		/* justify-content: center; */
 	}
-	input {
-		padding: 0.5rem;
-		font-size: 1.1rem;
-		outline: none;
-		border: none;
-		width: 100%;
-	}
+
 	select {
 		border: none;
 		outline: none;
@@ -43,16 +38,20 @@ const Menu = styled.section<TMenu>`
 	}
 	div {
 		width: 20rem;
-
 		padding-right: 0.5rem;
-		/* border-bottom: 2px solid #717171; */
 		background-color: #fff;
-
 		display: flex;
-		/* width: max-content; */
 		align-items: center;
+		input {
+			padding: 0.5rem;
+			font-size: 1.1rem;
+			outline: none;
+			border: none;
+			width: 100%;
+		}
 		svg {
 			color: #717171;
+			cursor: pointer;
 		}
 	}
 	button {
@@ -104,6 +103,10 @@ const SideMenu = ({
 	menuOpen,
 	getFact
 }: IProps) => {
+	const hideSideMenu = () => {
+		getCatByName(name)
+		setMenuOpen(false)
+	}
 	return (
 		<Menu open={menuOpen}>
 			<div>
@@ -112,6 +115,7 @@ const SideMenu = ({
 					name={name}
 					getCatByName={getCatByName}
 				/>
+				<BsSearch onClick={hideSideMenu} size={'1.5rem'} />
 			</div>
 			<SelectComponent
 				optionsArray={origin}

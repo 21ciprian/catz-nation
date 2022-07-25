@@ -90,6 +90,7 @@ const Home = ({data}: IHome) => {
 		setFilteredCats(filterred)
 		console.log({filterred})
 		setCatsOrigin('Origin')
+		setMenuOpen(false)
 	}
 	//filter cats by lifespan when user chooses an option
 
