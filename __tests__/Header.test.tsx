@@ -53,12 +53,17 @@ describe('HeaderComponent', () => {
 	})
 	it('Should render select lifespan', () => {
 		setup()
-		const selectOrigin = screen.getByText(/lifespan/i)
-		expect(selectOrigin).toBeInTheDocument()
+		const selectLifeSpan = screen.getByText(/lifespan/i)
+		expect(selectLifeSpan).toBeInTheDocument()
 	})
 	it('Should render select weight', () => {
 		setup()
-		const selectOrigin = screen.getByText(/weight/i)
-		expect(selectOrigin).toBeInTheDocument()
+		const selectWeight = screen.getByText(/weight/i)
+		expect(selectWeight).toBeInTheDocument()
+	})
+	it('Should render get cat fact button', () => {
+		setup()
+		const getFactBtn = screen.getByText(/get a cat/i)
+		expect(getFactBtn).toBeInTheDocument()
 	})
 })
