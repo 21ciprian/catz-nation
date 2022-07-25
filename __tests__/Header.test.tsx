@@ -46,4 +46,9 @@ describe('HeaderComponent', () => {
 		expect(searchInput).toBeInTheDocument()
 		expect(searchInput).toHaveValue('')
 	})
+	it('Should render select origin', () => {
+		setup()
+		const selectOrigin = screen.getByText(/origin/i)
+		expect(selectOrigin).toBeInTheDocument()
+	})
 })
