@@ -120,6 +120,7 @@ const Home = ({data}: IHome) => {
 		const res = await fetch(`https://catfact.ninja/fact`)
 		const f = await res.json()
 		setFact(f?.fact)
+		setMenuOpen(false)
 	}
 
 	return (
