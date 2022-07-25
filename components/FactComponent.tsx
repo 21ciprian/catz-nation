@@ -9,10 +9,13 @@ const FactText = styled.p`
 	align-items: center;
 	justify-content: center;
 	background-color: #f16ff1;
-	padding: 1rem 6rem;
+	padding: 1rem 2rem;
 	color: #fff;
 	font-weight: 700;
-	font-size: 1.1rem;
+	font-size: 1.2rem;
+	@media (min-width: 760px) {
+		padding: 1rem 2rem;
+	}
 `
 const FactComponent = ({fact}: IFact) => {
 	return (
