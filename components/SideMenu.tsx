@@ -2,7 +2,10 @@ import styled from 'styled-components'
 import InputComponent from './InputComponent'
 import SelectComponent from './SelectComponent'
 
-const Menu = styled.section`
+type TMenu = {
+	open: boolean
+}
+const Menu = styled.section<TMenu>`
 	background-color: rgba(8, 8, 8, 0.673);
 	width: 100vw;
 	height: 100vh;
@@ -14,7 +17,8 @@ const Menu = styled.section`
 	position: fixed;
 	top: 0;
 	right: 0;
-
+	transform: translateX(${props => (props.open ? '0' : '100vw')});
+	transition: all 1s ease;
 	/* display: none; */
 
 	gap: 1rem;
@@ -101,7 +105,7 @@ const SideMenu = ({
 	getFact
 }: IProps) => {
 	return (
-		<Menu>
+		<Menu open={menuOpen}>
 			<div>
 				<InputComponent
 					placeholder='Search by breed...'
