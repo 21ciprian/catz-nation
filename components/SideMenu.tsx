@@ -20,12 +20,10 @@ const Menu = styled.section<TMenu>`
 	right: 0;
 	transform: translateX(${props => (props.open ? '0' : '100vw')});
 	transition: all 1s ease;
-	/* display: none; */
 
 	gap: 1rem;
 	@media (min-width: 1080px) {
 		display: none;
-		/* justify-content: center; */
 	}
 
 	select {

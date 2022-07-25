@@ -51,9 +51,8 @@ const CatContainer = styled.section`
 	gap: 2rem;
 	margin: 2rem auto;
 	padding: 1rem;
-	/* border: 2px solid red; */
 `
-// const audio: HTMLAudioElement = new Audio('/meow.mp3')
+
 const Home = ({data}: IHome) => {
 	console.log('cats data: ', data)
 	const [fact, setFact] = useState<string>(

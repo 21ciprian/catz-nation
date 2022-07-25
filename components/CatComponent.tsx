@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import styled from 'styled-components'
-// import cat404 from '../assets/cat404.jpg'
 const cat404 = '/cat404.jpg'
 interface ICat {
 	cat: {
