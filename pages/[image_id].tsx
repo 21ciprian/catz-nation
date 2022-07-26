@@ -32,6 +32,9 @@ const CatContainer = styled.article`
 	border: 1px solid #e4e4e4;
 	border-radius: 1rem;
 	transition: all 0.5s ease;
+	@media (min-width: 760px) {
+		max-width: 35rem;
+	}
 
 	&:hover {
 		box-shadow: 0 0 8px 5px #bababa;
@@ -73,12 +76,13 @@ const CatContainer = styled.article`
 		align-items: center;
 
 		h3 {
-			flex: 0.6;
+			/* flex: 0.6; */
 			margin-left: 1rem;
 		}
 		div:first-of-type {
 			display: flex;
-			flex: 0.5;
+			/* flex: 0.5; */
+			width: max-content;
 
 			/* border: 1px solid black; */
 			justify-content: flex-end;
@@ -115,6 +119,7 @@ const Description = styled.p`
 `
 const Stats = styled.section`
 	padding: 1rem;
+	background-color: #f16ff1;
 
 	display: flex;
 	justify-content: space-between;
@@ -126,9 +131,11 @@ const Stats = styled.section`
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		width: 100%;
 	}
 	div:first-of-type {
-		flex: 0.5;
+		/* flex: 0.5; */
+		margin-left: -3.5em;
 	}
 `
 const ImgDiv = styled.div``
