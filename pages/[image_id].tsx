@@ -22,7 +22,7 @@ interface IParams {
 	}
 }
 const CatContainer = styled.article`
-	width: 40%;
+	width: 90%;
 	height: 100%;
 	/* padding: 1rem; */
 	display: flex;
