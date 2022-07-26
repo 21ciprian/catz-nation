@@ -125,7 +125,7 @@ const Stats = styled.section`
 	justify-content: space-between;
 	width: 100%;
 	li {
-		list-style: inside;
+		list-style: none;
 	}
 	div {
 		display: flex;
@@ -179,17 +179,17 @@ const Cat = ({data}: IBreeds) => {
 						<div>
 							<h4>Qualities:</h4>
 							<ul>
-								{data?.breeds[0]?.temperament.split(',').map(q => (
-									<li key={q}>{q}</li>
+								{data?.breeds[0]?.temperament.split(', ').map(q => (
+									<li key={q}>• {q}</li>
 								))}
 							</ul>
 						</div>
 						<div>
 							<h4>Other stats:</h4>
 							<ul>
-								<li>Weight (kg): {data?.breeds[0]?.weight?.metric}</li>
-								<li>Lifespan (years): {data?.breeds[0]?.life_span}</li>
-								<li>Origin: {data?.breeds[0]?.origin}</li>
+								<li>• Weight (kg): {data?.breeds[0]?.weight?.metric}</li>
+								<li>• Lifespan (years): {data?.breeds[0]?.life_span}</li>
+								<li>• Origin: {data?.breeds[0]?.origin}</li>
 							</ul>
 						</div>
 					</Stats>
