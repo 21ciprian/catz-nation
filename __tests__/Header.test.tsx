@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Header from '../components/Header'
-// import App from '../pages/index'
+const mockCatFact = jest.fn()
 const setup = () => {
 	return render(
 		<Header
@@ -19,9 +20,7 @@ const setup = () => {
 			setMenuOpen={function (arg: boolean): void {
 				throw new Error('Function not implemented.')
 			}}
-			getFact={function (): void {
-				throw new Error('Function not implemented.')
-			}}
+			getFact={mockCatFact}
 			menuOpen={false}
 			catsOrigin={''}
 			catsLifeSpan={''}
@@ -65,5 +64,11 @@ describe('HeaderComponent', () => {
 		setup()
 		const getFactBtn = screen.getByText(/get a cat/i)
 		expect(getFactBtn).toBeInTheDocument()
+	})
+	it('Should call get cat fact function when button is clicked', async () => {
+		setup()
+		const getFactBtn = screen.getByText(/get a cat/i)
+		await userEvent.click(getFactBtn)
+		expect(mockCatFact).toHaveBeenCalled()
 	})
 })

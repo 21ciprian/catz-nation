@@ -18,5 +18,5 @@ const InputComponent = ({name, getCatByName, placeholder}: IInput) => {
 		/>
 	)
 }
-
+//getCatByName
 export default InputComponent
