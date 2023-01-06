@@ -1,16 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import styled from 'styled-components'
-const cat404 = '/cat404.jpg'
 interface ICat {
 	cat: {
 		id: string
 		wikipedia_url: string
 		name: string
-		image: {
-			url: string
-			id: string
-		}
+		reference_image_id: string
 		description: string
 	}
 }
@@ -68,18 +64,19 @@ const CatContainer = styled.div`
 		cursor: pointer;
 	}
 `
+
 const CatComponent = ({cat}: ICat) => {
 	return (
 		<CatContainer>
 			<div>
 				<img
-					src={`${!cat?.image?.url ? cat404 : cat?.image?.url}`}
+					src={`https://cdn2.thecatapi.com/images/${cat?.reference_image_id}.jpg`}
 					alt={cat?.name}
 				/>
 			</div>
 			<div>
 				<h3>{cat?.name}</h3>
-				<Link href={`/${cat?.image?.id}`}>
+				<Link href={`/${cat?.reference_image_id}`}>
 					<button>Find out more</button>
 				</Link>
 			</div>

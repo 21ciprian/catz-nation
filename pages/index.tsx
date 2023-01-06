@@ -15,6 +15,7 @@ import {
 	generateOriginArray,
 	generateWeightArray
 } from '../utils'
+
 export interface ICat {
 	cat: any
 	adaptability: number
@@ -26,10 +27,7 @@ export interface ICat {
 	description: string
 	intelligence: number
 	name: string
-	image: {
-		url: string
-		id: string
-	}
+	reference_image_id: string
 	life_span: string
 	origin: string
 	temperament: string
@@ -52,9 +50,13 @@ const CatContainer = styled.section`
 	margin: 2rem auto;
 	padding: 1rem;
 `
+export async function getServerSideProps() {
+	const cresponse = await fetch(`https://api.thecatapi.com/v1/breeds`)
+	const data = await cresponse.json()
 
+	return {props: {data}}
+}
 const Home = ({data}: IHome) => {
-	console.log('cats data: ', data)
 	const [fact, setFact] = useState<string>(
 		'One reason that kittens sleep so much is because a growth hormone is released only during sleep.'
 	)
@@ -67,7 +69,6 @@ const Home = ({data}: IHome) => {
 	const audio = useRef<HTMLAudioElement | undefined>(
 		typeof Audio !== 'undefined' ? new Audio('/meow.mp3') : undefined
 	)
-	console.log({menuOpen})
 	//generate arrays for filtering cat objects
 	const origin = generateOriginArray(data)
 	const lifespan = generateLifespanArray(data)
@@ -172,13 +173,6 @@ const Home = ({data}: IHome) => {
 			</CatContainer>
 		</div>
 	)
-}
-
-export async function getServerSideProps() {
-	const response = await fetch(`https://api.thecatapi.com/v1/breeds`)
-	const data = await response.json()
-
-	return {props: {data}}
 }
 
 export default Home

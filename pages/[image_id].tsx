@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Link from 'next/link'
-import {useRouter} from 'next/router'
 import styled from 'styled-components'
 
 interface ICat {
@@ -12,6 +11,7 @@ interface ICat {
 	temperament: string
 	weight: {metric: string}
 	wikipedia_url: string
+	reference_image_id: string
 }
 interface IBreeds {
 	data: {breeds: ICat[]; url: string}
@@ -148,9 +148,6 @@ export async function getServerSideProps({params}: IParams) {
 	return {props: {data}}
 }
 const Cat = ({data}: IBreeds) => {
-	const router = useRouter()
-	// console.log('router.query:', router?.query?.cat)
-	console.log('cat: ', data)
 	return (
 		<CatContainer>
 			{!data.breeds[0] ? (
