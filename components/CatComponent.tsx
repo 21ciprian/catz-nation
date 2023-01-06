@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
+import {useRef} from 'react'
 import styled from 'styled-components'
+import {playMeow} from 'utils'
 interface ICat {
 	cat: {
 		id: string
@@ -66,6 +68,9 @@ const CatContainer = styled.div`
 `
 
 const CatComponent = ({cat}: ICat) => {
+	const audio = useRef<HTMLAudioElement | undefined>(
+		typeof Audio !== 'undefined' ? new Audio('/meow.mp3') : undefined
+	)
 	return (
 		<CatContainer>
 			<div>
@@ -77,7 +82,7 @@ const CatComponent = ({cat}: ICat) => {
 			<div>
 				<h3>{cat?.name}</h3>
 				<Link href={`/${cat?.reference_image_id}`}>
-					<button>Find out more</button>
+					<button onClick={() => playMeow(audio)}>Find out more</button>
 				</Link>
 			</div>
 		</CatContainer>

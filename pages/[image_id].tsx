@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Link from 'next/link'
+import {useRef} from 'react'
 import styled from 'styled-components'
+import {playMeow} from 'utils'
 
 interface ICat {
 	description: string
@@ -120,6 +122,7 @@ const Description = styled.p`
 const Stats = styled.section`
 	padding: 1rem;
 	background-color: #f16ff1;
+	color: #f7f7f7;
 
 	display: flex;
 	justify-content: space-between;
@@ -148,6 +151,10 @@ export async function getServerSideProps({params}: IParams) {
 	return {props: {data}}
 }
 const Cat = ({data}: IBreeds) => {
+	const audio = useRef<HTMLAudioElement | undefined>(
+		typeof Audio !== 'undefined' ? new Audio('/meow.mp3') : undefined
+	)
+
 	return (
 		<CatContainer>
 			{!data.breeds[0] ? (
@@ -161,13 +168,13 @@ const Cat = ({data}: IBreeds) => {
 						<h3>{data?.breeds[0]?.name}</h3>
 						<div>
 							<Link href='/'>
-								<p>Go Back</p>
+								<p onClick={() => playMeow(audio)}>Go Back</p>
 							</Link>
 							<a
 								href={data?.breeds[0]?.wikipedia_url}
 								target='_blank'
 								rel='noreferrer'>
-								<p>Wiki..</p>
+								<p onClick={() => playMeow(audio)}>Wiki..</p>
 							</a>
 						</div>
 					</div>

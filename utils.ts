@@ -30,3 +30,6 @@ export const filterCatsByWeight = (data: ICat[], weight: string) => {
 		cat?.weight?.metric?.toLocaleLowerCase().includes(weight.toLowerCase())
 	)
 }
+export const playMeow = (sound: any) => {
+	sound.current?.play()
+}

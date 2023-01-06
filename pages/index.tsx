@@ -13,9 +13,9 @@ import {
 	filterCatsByWeight,
 	generateLifespanArray,
 	generateOriginArray,
-	generateWeightArray
+	generateWeightArray,
+	playMeow
 } from '../utils'
-
 export interface ICat {
 	cat: any
 	adaptability: number
@@ -99,7 +99,6 @@ const Home = ({data}: IHome) => {
 		const filterred = filterCatsByLifespan(data, lifespan)
 
 		setFilteredCats(filterred)
-		console.log({filterred})
 		setCatsLifeSpan('Lifespan (years)')
 		setMenuOpen(false)
 	}
@@ -116,7 +115,8 @@ const Home = ({data}: IHome) => {
 	}
 
 	const getFact = async () => {
-		audio.current?.play()
+		playMeow(audio)
+
 		const res = await fetch(`https://catfact.ninja/fact`)
 		const f = await res.json()
 		setFact(f?.fact)
