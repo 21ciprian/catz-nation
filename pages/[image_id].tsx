@@ -125,20 +125,27 @@ const Stats = styled.section`
 	color: #f7f7f7;
 
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
+	/* gap: 2rem; */
 	width: 100%;
-	li {
-		list-style: none;
-	}
 	div {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		height: 100%;
 		width: 100%;
-	}
-	div:first-of-type {
-		/* flex: 0.5; */
-		margin-left: -3.5em;
+		flex: 0.4;
+
+		h4 {
+			text-align: start;
+		}
+		ul {
+			width: 100%;
+		}
+		&:first-of-type {
+			margin-left: 1rem;
+			flex: 0.4;
+		}
 	}
 `
 const ImgDiv = styled.div``
