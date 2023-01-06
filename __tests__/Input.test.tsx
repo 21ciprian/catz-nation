@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react'
+import {fireEvent, render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Input from '../components/InputComponent'
 const getCatByName = jest.fn((str: string) => str)
@@ -12,6 +12,9 @@ const setup = () => {
 	)
 }
 
+beforeEach(() => {
+	jest.resetAllMocks()
+})
 describe('Input Component', () => {
 	it('Render search input', () => {
 		setup()
@@ -19,18 +22,19 @@ describe('Input Component', () => {
 		expect(input).toBeInTheDocument()
 	})
 	it('Should call getCatByName function when user types in the input field', async () => {
+		const mockGetCatByName = getCatByName as jest.Mock
 		render(
 			<Input
 				name={''}
 				placeholder={'search by breed'}
-				getCatByName={getCatByName} //
+				getCatByName={mockGetCatByName} //
 			/>
 		)
+		const view = userEvent.setup()
 		const input = screen.getByPlaceholderText(/search by breed/i)
 
-		await userEvent.type(input, 'Cat')
-		expect(getCatByName).toHaveBeenCalled()
-		console.log({input})
-		// expect(input).toHaveValue('Cat')
+		fireEvent.change(input, {target: {value: 'Cat'}})
+		expect(mockGetCatByName).toHaveBeenCalled()
+		expect(mockGetCatByName).toHaveBeenCalledWith('Cat')
 	})
 })
